@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    111
+</body>
+<script>
+  // 用IE浏览器来运行这个html代码创建树形控件的数据
+    function init2(opt) {
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    // 获取目录下所有文件，对于该浏览器缓存目录，仅能获取到一个文件
+    // var path = 'C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\models\\gltf_glb';
+    var path = opt.path;
+    //path = 'F:\\test';
+    var fldr = fso.GetFolder(path);
+    var ff = new Enumerator(fldr.Files);
+    var fileArray = [];
+    var fileName = '';
+    var count = 0;
+    for (; !ff.atEnd(); ff.moveNext()) {  
+        fileName = ff.item().Name + '';// 文件名
+        if(fileName.substring(fileName.indexOf('.')+1) === opt.suffix){
+            fileName = fileName.substring(0, fileName.indexOf('.'));
+            // fileName = fileName.substring(fileName.lastIndexOf('@') + 1);
+            fileArray.push(fileName);
+        }     
+        count++;
+    }
+
+    let Array3 = [];
+    fileArray.forEach(function(item){
+     let obj = {
+        id: 3,
+        label: item,
+     }
+     Array3.push(obj);
+    })
+    let Obj2 = {
+    id: 2,
+    label: opt.suffix + "模型",
+    children:[]
+    }
+    Obj2.children = Array3
+    return Obj2;
+}
+// 用IE浏览器来运行这个html代码创建树形控件的数据
+let treeArray2 = []
+// 创建DAE模型数据
+let path = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\models\\dae\\cars"
+let suffix = "DAE"
+let optionObj = {
+    path:path,
+    suffix:suffix
+}
+let daeObj2 = init2(optionObj)
+daeObj2.path = path
+treeArray2.push(daeObj2);
+// 创建fbx模型数据
+let path1 = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\models\\fbx"
+let suffix1 = "fbx"
+let optionObj1 = {
+    path:path1,
+    suffix:suffix1
+}
+let fbxObj2 = init2(optionObj1)
+fbxObj2.path = path1
+treeArray2.push(fbxObj2);
+// 创建glb模型数据
+let path2 = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\models\\gltf_glb"
+let suffix2 = "glb"
+let optionObj2 = {
+    path:path2,
+    suffix:suffix2
+}
+let glbObj2 = init2(optionObj2)
+glbObj2.path = path2
+treeArray2.push(glbObj2);
+// 创建3dtile模型数据1
+let path3 = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\3dtiles\\ft"
+let suffix3 = "json"
+let optionObj3 = {
+    path:path3,
+    suffix:suffix3
+}
+let jsonObj2 = init2(optionObj3)
+jsonObj2.label = '3dtile模型' // 改名
+jsonObj2.path = path3
+treeArray2.push(jsonObj2);
+// 创建3dtile模型数据2
+let path4 = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\3dtiles\\ft-pipe"
+let suffix4 = "json"
+let optionObj4 = {
+    path:path4,
+    suffix:suffix4
+}
+let jsonObj22 = init2(optionObj4)
+jsonObj22.label = '3dtile模型' // 改名
+jsonObj22.path = path4
+treeArray2.push(jsonObj22);
+// 创建3dtile模型数据3
+let path5 = "C:\\Users\\Administrator\\Desktop\\我的项目\\DTVueDemo\\src\\dtmap\\data\\testdata\\BIM\\BIM_TEST_g1"
+let suffix5 = "json"
+let optionObj5 = {
+    path:path5,
+    suffix:suffix5
+}
+let jsonObj222 = init2(optionObj5)
+jsonObj222.label = '3dtile模型' // 改名
+jsonObj222.path = path5
+treeArray2.push(jsonObj222);
+console.log(treeArray2)
+
+</script>
+
+</html>
